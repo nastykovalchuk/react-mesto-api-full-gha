@@ -1,0 +1,17 @@
+.page__main {
+  margin-top: 36.25px
+}
+
+@media (max-width: 1023px) {
+  .page__main {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 38.25px;
+  }
+}
+@media (max-width: 347px) {
+  .page__main {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}

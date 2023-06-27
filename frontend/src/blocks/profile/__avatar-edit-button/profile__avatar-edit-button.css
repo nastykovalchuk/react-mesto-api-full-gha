@@ -1,0 +1,26 @@
+.profile__avatar-edit-button {
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+}
+
+.profile__avatar-edit-button::before {
+  content: url(../../../images/avatar-editButton.svg);
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: none;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__avatar-edit-button {
+      margin: 0 0 20px 0;
+  }
+}

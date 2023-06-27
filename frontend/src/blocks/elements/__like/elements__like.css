@@ -1,0 +1,18 @@
+.elements__like {
+  display: flex;
+  flex-direction: column;
+  min-width: 22px;
+  width: 19px;
+  height: 19px;
+  margin-bottom: 3px;
+  border: none;
+  background: url(../../../images/like.svg);
+  background-position: 50%;
+  position: relative;
+  cursor: pointer;
+  color: black;
+}
+
+.elements__like:hover {
+    opacity: .5;
+}

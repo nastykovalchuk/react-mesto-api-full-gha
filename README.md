@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/nastykovalchuk/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 62.84.123.162
 
-Frontend https://...
+Frontend https://mesto.nastykovalchuk.nomoreparties.sbs/
 
-Backend https://...
+Backend https://api.mesto.nastykovalchuk.nomoreparties.sbs/

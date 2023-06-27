@@ -1,0 +1,9 @@
+.elements__like-counter{
+padding: 0;
+border: none;
+max-width: 10px;
+height: 13px;
+color: black;
+pointer-events: none;
+font-size: 13px;
+}

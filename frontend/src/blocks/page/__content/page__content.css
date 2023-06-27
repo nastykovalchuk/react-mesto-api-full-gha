@@ -1,0 +1,11 @@
+.page__content {
+  max-width: 882px;
+  min-width: 320px;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}

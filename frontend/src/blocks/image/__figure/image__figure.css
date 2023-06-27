@@ -1,0 +1,13 @@
+.image__figure {
+    margin: 0;
+}
+
+.image__figure img {
+    max-height: 75vh;
+}
+
+@media (max-width: 765px) {
+    .image__figure img {
+      max-width: 75vw;
+    }
+  }

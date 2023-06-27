@@ -1,0 +1,17 @@
+.profile__avatar {
+    margin-right: 30px;
+    height: 120px;
+    width: 120px;
+}
+
+
+.profile__avatar:hover .profile__avatar-edit-button::before {
+    display: flex;
+}
+
+@media screen and (max-width: 1023px) {
+    .profile__avatar {
+        margin-bottom: 22px;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,16 @@
+.auth__login-link {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  padding-top: 15px;
+  line-height: 17px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+@media (max-width: 633px) {
+  .auth__login-link {
+    padding-top: 20px;
+  }
+}

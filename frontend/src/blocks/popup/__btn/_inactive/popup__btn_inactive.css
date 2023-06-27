@@ -1,0 +1,11 @@
+.popup__btn_inactive {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #c4c4c4;
+  background: white;
+  pointer-events: none;
+  user-select: none;
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+}

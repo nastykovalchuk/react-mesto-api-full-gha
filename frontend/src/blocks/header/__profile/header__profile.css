@@ -1,0 +1,5 @@
+.header__profile {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+}
