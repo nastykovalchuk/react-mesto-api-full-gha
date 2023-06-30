@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 62.84.123.162
+IP 62.84.123.162
 
 Frontend https://mesto.nastykovalchuk.nomoreparties.sbs/
 
