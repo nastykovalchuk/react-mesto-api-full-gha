@@ -38,7 +38,7 @@ class AuthApi {
 }
 
 const authApi = new AuthApi({
-  baseUrl: "https://auth.nomoreparties.co",
+  baseUrl: process.env.REACT_APP_API_URL || "http://localhost:2000",
   headers: {
     "Content-Type": "application/json",
   },

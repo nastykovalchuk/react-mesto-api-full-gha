@@ -37,12 +37,7 @@ module.exports.getCurrentUser = (req, res, next) => {
       }
       return res.send(user);
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        return next(new InaccurateDataError('Invalid data'));
-      }
-      return next(err);
-    });
+    .catch((err) => next(err));
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -128,12 +123,7 @@ module.exports.login = (req, res, next) => {
       }))
     .then((user) => {
       const jwt = jsonwebtoken.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.cookie('jwt', jwt, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: true,
-      })
-        .send({ _id: user._id });
+      res.send({ _id: user._id, token: jwt });
     })
     .catch(next);
 };

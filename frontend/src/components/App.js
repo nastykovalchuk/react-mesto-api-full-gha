@@ -10,7 +10,7 @@ import authApi from "../utils/authApi";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
@@ -27,10 +27,35 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const [isInfoTooltipSuccess, setIsInfoTooltipSuccess] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      authApi
+        .checkToken(jwt)
+        .then((data) => {
+          if (data) {
+            navigate("/", { replace: true });
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+}, [navigate]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getCards()])
+      .then(([user, cards]) => {
+        setCurrentUser(user);
+        setCards(cards);
+      })
+      .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
@@ -97,12 +122,14 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, isLiked)
-    .then((newCard) => {
-      setCards((state) =>
-        state.map((c) => (c._id === card._id ? newCard : c))
-      )
-    }).catch((err) => console.log(err));;
+    api
+      .changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleCardDelete(e) {
@@ -110,8 +137,7 @@ function App() {
     api
       .deleteCard(selectedCard._id)
       .then(() => {
-        setCards((state) => 
-        state.filter((c) => c._id !== selectedCard._id));
+        setCards((state) => state.filter((c) => c._id !== selectedCard._id));
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -140,7 +166,7 @@ function App() {
         if (data.token) {
           setIsLoggedIn(true);
           localStorage.setItem("jwt", data.token);
-          navigate("/", { replace: true }); 
+          navigate("/", { replace: true });
         }
       })
       .catch((err) => {
@@ -152,41 +178,15 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem("jwt");
+    setCurrentUser({});
     setIsLoggedIn(false);
-    navigate("/", { replace: true }); 
+    navigate("/", { replace: true });
   }
-
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => setCurrentUser(res))
-      .catch((err) => console.log(err));
-    api
-      .getCards()
-      .then((res) => setCards(res))
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      authApi
-        .checkToken(jwt)
-        .then((data) => {
-          if (data) {
-            setIsLoggedIn(true);
-            setUserEmail(data.data.email);
-            navigate("/", { replace: true }); 
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content">
-        <Header userEmail={userEmail} onLogout={handleLogout} />
+        <Header userEmail={currentUser.email} onLogout={handleLogout} />
         <Routes>
           <Route
             path="/"
