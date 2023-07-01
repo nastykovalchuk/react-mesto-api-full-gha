@@ -30,7 +30,7 @@ module.exports.validateCreateCard = celebrate({
 });
 
 module.exports.validateReqWithCardId = celebrate({
-  body: Joi.object().keys({
+  params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
   }),
 });
@@ -38,7 +38,7 @@ module.exports.validateReqWithCardId = celebrate({
 // ../routes/users
 
 module.exports.validateGetUser = celebrate({
-  body: Joi.object().keys({
+  params: Joi.object().keys({
     userId: Joi.string().required().length(24).hex(),
   }),
 });
@@ -55,9 +55,3 @@ module.exports.validatePatchAvatar = celebrate({
     avatar: Joi.string().required().pattern(URL_REGEX),
   }),
 });
-
-// module.exports.validate = celebrate({
-//   body: Joi.object().keys({
-
-//   }),
-// });
